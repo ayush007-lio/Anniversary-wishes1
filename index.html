@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Anniversary Slideshow</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Left Slideshow -->
+  <div class="slideshow left">
+    <img class="left-slide" src="c:/Users/user/Downloads/20250504_000924.jpg" alt="">
+    <img class="left-slide" src="c:/Users/user/Downloads/20240907_224606.jpg" alt="">
+    <img class="left-slide" src="c:/Users/user/Downloads/20240908_225647.jpg" alt="">
+    <img class="left-slide" src="c:/Users/user/Downloads/20230831105145_IMG_5886.JPG" alt="">
+    <img class="left-slide" src="c:\Users\user\Downloads\20230406_023955.jpg" alt="">
+    <img class="left-slide" src="c:\Users\user\Downloads\20240908_225800.jpg" alt="">
+    <img class="left-slide" src="c:\Users\user\Downloads\20250510_001430.jpg" alt="">
+    <img class="left-slide" src="c:\Users\user\Downloads\20240810_214527~3.jpg" alt="">
+    <img class="left-slide" src="c:\Users\user\Downloads\20240914_003653.jpg" alt="">
+    <img class="left-slide" src="c:\Users\user\Downloads\PXL_20241226_062136907.NIGHT.jpg" alt="">
+  </div>
+
+  <!-- Center Message with Typing Effect -->
+  <div class="message-box">
+    <h1 id="type-title"></h1>
+    <p id="type-msg"></p>
+    <p id="type-sign"></p>
+  </div>
+
+  <!-- Right Slideshow -->
+  <div class="slideshow right">
+    <img class="right-slide" src="c:/Users/user/Downloads/20240810_214452.jpg" alt="">
+    <img class="right-slide" src="c:/Users/user/Downloads/PXL_20250504_040943563-COLLAGE.jpg" alt="">
+    <img class="right-slide" src="c:/Users/user/Downloads/DJI_20230521_021956_891.jpg" alt="">
+    <img class="right-slide" src="c:/Users/user/Downloads/IMAGE_20240831_155834_984.jpg" alt="">
+    <img class="right-slide" src="c:\Users\user\Downloads\InShot_20231021_142626718.jpg" alt="">
+    <img class="right-slide" src="c:\Users\user\Downloads\PXL_20250510_042039754~2.jpg" alt="">
+    <img class="right-slide" src="c:\Users\user\Downloads\20250201_010052.jpg" alt="">
+    <img class="right-slide" src="c:\Users\user\Downloads\PXL_20241123_074751706.PORTRAIT~2.jpg" alt="">
+    <img class="right-slide" src="c:\Users\user\Downloads\PXL_20241226_060550594.NIGHT.jpg" alt="">
+    <img class="right-slide" src="c:\Users\user\Downloads\PXL_20250101_045607404.NIGHT.jpg" alt="">
+  </div>
+
+  <!-- Floating Hearts -->
+  <div class="floating-hearts"></div>
+
+  <!-- JavaScript -->
+  <script>
+  // Message Variables (Declared FIRST)
+  const titleText = "Happy 5th Anniversary to the most inspiring couple!";
+  const messageText = "Five beautiful years of sharing dreams, overcoming challenges, and walking through life hand in hand. Your bond is a shining light of what true love really means — filled with kindness, gentle sacrifice, and unwavering faith in one another. May your journey be forever blessed with joy, exciting adventures, and countless moments that make your hearts skip a beat.";
+  const signText = "- With ❤️ love, from your favorite fan, friend, and forever supporter.";
+
+
+    // Slideshow Logic
+    let leftIndex = 0;
+    let rightIndex = 0;
+
+    const leftSlides = document.querySelectorAll('.left-slide');
+    const rightSlides = document.querySelectorAll('.right-slide');
+
+    function showSlides() {
+      leftSlides.forEach(slide => slide.style.display = "none");
+      rightSlides.forEach(slide => slide.style.display = "none");
+
+      leftIndex = (leftIndex + 1) % leftSlides.length;
+      rightIndex = (rightIndex + 1) % rightSlides.length;
+
+      leftSlides[leftIndex].style.display = "block";
+      rightSlides[rightIndex].style.display = "block";
+    }
+
+    showSlides();
+    setInterval(showSlides, 3000);
+
+    // Typing Effect
+    function typeWriter(id, text, i, speed, callback) {
+      if (i < text.length) {
+        document.getElementById(id).innerHTML += text.charAt(i);
+        setTimeout(() => typeWriter(id, text, i + 1, speed, callback), speed);
+      } else if (callback) {
+        callback();
+      }
+    }
+
+    // On Page Load
+    window.onload = function () {
+      typeWriter("type-title", titleText, 0, 80, function () {
+        typeWriter("type-msg", messageText, 0, 50, function () {
+          typeWriter("type-sign", signText, 0, 50);
+        });
+      });
+
+      // Floating Hearts
+      setInterval(() => {
+        const heart = document.createElement("span");
+        heart.classList.add("heart");
+        heart.innerText = "❤";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = Math.random() * 2 + 1 + "rem";
+        document.querySelector(".floating-hearts").appendChild(heart);
+        setTimeout(() => heart.remove(), 3000);
+      }, 500);
+    };
+  </script>
+</body>
+</html>
